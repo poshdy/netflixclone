@@ -13,12 +13,15 @@ interface USER {
   avatar_url: string;
 }
 interface ContextI {
-  user:USER | null
+  user: USER | null;
   error: any;
   isLoading: boolean;
   mutate: any;
   signOut: () => Promise<void>;
-  SignUPwithEmailandPassword:(email: string, password: string) => Promise<string | null>;
+  SignUPwithEmailandPassword: (
+    email: string,
+    password: string
+  ) => Promise<string | null>;
   signInWithGithub: () => Promise<void>;
   signInWithGoogle: () => Promise<void>;
   signInWithEmail: (email: string, password: string) => Promise<string | null>;
@@ -30,7 +33,7 @@ const Context = createContext<ContextI>({
   isLoading: true,
   mutate: null,
   signOut: async () => {},
-  SignUPwithEmailandPassword: async (email:string,password:string)=>null,
+  SignUPwithEmailandPassword: async (email: string, password: string) => null,
   signInWithGithub: async () => {},
   signInWithGoogle: async () => {},
   signInWithEmail: async (email: string, password: string) => null,
@@ -67,18 +70,20 @@ export default function SupabaseAuthProvider({
     mutate,
   } = useSWR(serverSession ? "user-context" : null, getUser);
 
+  const SignUPwithEmailandPassword = async (
+    email: string,
+    password: string
+  ) => {
+    const { data, error } = await supabase.auth.signUp({
+      email,
+      password,
+    });
+    if (error) {
+      return error.message;
+    }
 
-const SignUPwithEmailandPassword = async (email: string, password: string)=>{
-  const {data  , error} = await supabase.auth.signUp({
-    email,
-    password
-  })
-  if (error) {
-    return error.message;
-  }
-
-  return null;
-}
+    return null;
+  };
 
   const signInWithEmail = async (email: string, password: string) => {
     const { data, error } = await supabase.auth.signInWithPassword({
@@ -94,20 +99,26 @@ const SignUPwithEmailandPassword = async (email: string, password: string)=>{
   };
   const getURL = () => {
     let url =
-      process?.env?.NEXT_PROD_URL ?? 
-      process?.env?.NEXT_PUBLIC_VERCEL_URL ?? 
-      'http://localhost:3000/'
-    url = url.includes('http') ? url : `https://${url}`
-   
-    url = url.charAt(url.length - 1) === '/' ? url : `${url}/`
-    return url
-  }
+      process?.env?.NEXT_PROD_URL ??
+      process?.env?.NEXT_PUBLIC_VERCEL_URL ??
+      "http://localhost:3000/";
+    url = url.includes("http") ? url : `https://${url}`;
+
+    url = url.charAt(url.length - 1) === "/" ? url : `${url}/`;
+    return url;
+  };
   const signInWithGithub = async () => {
-    await supabase.auth.signInWithOAuth({ provider: "github" , options:{redirectTo:getURL()}});
+    await supabase.auth.signInWithOAuth({
+      provider: "github",
+      options: { redirectTo: getURL() },
+    });
   };
 
   const signInWithGoogle = async () => {
-    await supabase.auth.signInWithOAuth({ provider: "google" ,options:{redirectTo:getURL()} });
+    await supabase.auth.signInWithOAuth({
+      provider: "google",
+      options: { redirectTo: getURL() },
+    });
   };
 
   const signOut = async () => {
