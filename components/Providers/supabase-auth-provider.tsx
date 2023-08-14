@@ -92,13 +92,22 @@ const SignUPwithEmailandPassword = async (email: string, password: string)=>{
 
     return null;
   };
-
+  const getURL = () => {
+    let url =
+      process?.env?.NEXT_PROD_URL ?? 
+      process?.env?.NEXT_PUBLIC_VERCEL_URL ?? 
+      'http://localhost:3000/'
+    url = url.includes('http') ? url : `https://${url}`
+   
+    url = url.charAt(url.length - 1) === '/' ? url : `${url}/`
+    return url
+  }
   const signInWithGithub = async () => {
-    await supabase.auth.signInWithOAuth({ provider: "github" , options:{redirectTo:`${location.origin}/auth/callback`}});
+    await supabase.auth.signInWithOAuth({ provider: "github" , options:{redirectTo:getURL()}});
   };
 
   const signInWithGoogle = async () => {
-    await supabase.auth.signInWithOAuth({ provider: "google" ,options:{redirectTo:`${location.origin}/auth/callback`} });
+    await supabase.auth.signInWithOAuth({ provider: "google" ,options:{redirectTo:getURL()} });
   };
 
   const signOut = async () => {
