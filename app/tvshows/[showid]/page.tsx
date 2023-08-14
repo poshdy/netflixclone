@@ -4,7 +4,7 @@ import TvHeader from "@/components/Tv/TvHeader";
 import { getSimilar } from "@/fetchers/Details/SimilarMovies";
 
 import { getDetails } from "@/fetchers/Details/getDetails";
-import React, { Suspense } from "react";
+import React from "react";
 
 const TvDetailspage = async ({
   params,

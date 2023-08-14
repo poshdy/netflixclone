@@ -15,7 +15,7 @@ const Profilepage = async () => {
       </h1>
       <div className="w-full flex flex-col items-center justify-center gap-2  md:flex-row md:flex-wrap ">
         {Favs?.map((f) => (
-          <div className="relative w-[200px] h-[300px] md:w-[250px] md:h-[350px]">
+          <div key={f.movie_id} className="relative w-[200px] h-[300px] md:w-[250px] md:h-[350px]">
             <Image
               className="rounded-md object-cover shadow-md"
               priority
