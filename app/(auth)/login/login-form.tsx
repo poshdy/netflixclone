@@ -1,13 +1,11 @@
 "use client";
 import { useAuth } from "@/components/Providers/supabase-auth-provider";
-import { useSupabase } from "@/components/Providers/supabase-provider";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Github, Mail } from "lucide-react";
 import { useRouter } from "next/navigation";
-import {  useEffect, useState } from "react";
-import {Auth} from '@supabase/auth-ui-react'
-
+import { useEffect, useState } from "react";
+import { Label } from "@/components/ui/label";
 import {
   Card,
   CardContent,
@@ -16,10 +14,6 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-
-import { Label } from "@/components/ui/label";
-import { createClient } from "@/lib/supabase-client";
-
 const LoginForm = () => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
@@ -27,9 +21,6 @@ const LoginForm = () => {
   const { signInWithEmail, signInWithGithub, user, signInWithGoogle } =
     useAuth();
   const router = useRouter();
-
-  const supabase = useSupabase()
-
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -48,18 +39,10 @@ const LoginForm = () => {
     if (user) {
       router.push("/");
     }
-  }, [router , user]);
+  }, [router, user]);
 
   return (
-    <div>
-      <Auth providers={['google','github']} supabaseClient={supabase} />
-
-    </div>
-  );
-};
-
-export default LoginForm;
-{/* <Card>
+    <Card>
       <CardHeader className="space-y-1">
         <CardTitle className="text-2xl">Create an account</CardTitle>
         <CardDescription>
@@ -90,16 +73,31 @@ export default LoginForm;
         <form onSubmit={handleSubmit}>
           <div className="grid gap-2">
             <Label htmlFor="email">Email</Label>
-            <Input onChange={(e)=>setEmail(e.target.value)} id="email" type="email" placeholder="m@example.com" />
+            <Input
+              onChange={(e) => setEmail(e.target.value)}
+              id="email"
+              type="email"
+              placeholder="m@example.com"
+            />
           </div>
           <div className="grid gap-2">
             <Label htmlFor="password">Password</Label>
-            <Input  onChange={(e)=>setPassword(e.target.value)} id="password" type="password" />
+            <Input
+              onChange={(e) => setPassword(e.target.value)}
+              id="password"
+              type="password"
+            />
           </div>
         </form>
       </CardContent>
       <CardFooter>
-        {error && 'invalid credintials'}
-        <Button type="submit" className="w-full">Create account</Button>
+        {error && "invalid credintials"}
+        <Button type="submit" className="w-full">
+          Create account
+        </Button>
       </CardFooter>
-    </Card> */}
+    </Card>
+  );
+};
+
+export default LoginForm;

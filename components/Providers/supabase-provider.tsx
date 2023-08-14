@@ -5,9 +5,7 @@ import { createClient } from "@/lib/supabase-client"
 import type { SupabaseClient} from '@supabase/auth-helpers-nextjs'
 
 
-type SupabaseContext = {
-    supabase: SupabaseClient
-}
+
 
 const Context = createContext<SupabaseClient | undefined>(undefined)
 export default function SupabaseProvider({children}:{children: React.ReactNode}){

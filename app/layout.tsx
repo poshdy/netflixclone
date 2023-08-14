@@ -10,7 +10,6 @@ import "swiper/css/scrollbar";
 import { createClient } from "@/lib/supabase-server";
 import SupabaseProvider from "@/components/Providers/supabase-provider";
 import SupabaseAuthProvider from "@/components/Providers/supabase-auth-provider";
-
 import { Toaster } from "@/components/ui/toaster";
 
 export const dynamic = 'force-dynamic'
