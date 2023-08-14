@@ -6,6 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Github, Mail } from "lucide-react";
 import { useRouter } from "next/navigation";
 import {  useEffect, useState } from "react";
+import {Auth} from '@supabase/auth-ui-react'
 
 import {
   Card,
@@ -17,6 +18,7 @@ import {
 } from "@/components/ui/card";
 
 import { Label } from "@/components/ui/label";
+import { createClient } from "@/lib/supabase-client";
 
 const LoginForm = () => {
   const [email, setEmail] = useState<string>("");
@@ -26,6 +28,7 @@ const LoginForm = () => {
     useAuth();
   const router = useRouter();
 
+  const supabase = useSupabase()
 
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -48,7 +51,15 @@ const LoginForm = () => {
   }, [router , user]);
 
   return (
-    <Card>
+    <div>
+      <Auth providers={['google','github']} supabaseClient={supabase} />
+
+    </div>
+  );
+};
+
+export default LoginForm;
+{/* <Card>
       <CardHeader className="space-y-1">
         <CardTitle className="text-2xl">Create an account</CardTitle>
         <CardDescription>
@@ -91,8 +102,4 @@ const LoginForm = () => {
         {error && 'invalid credintials'}
         <Button type="submit" className="w-full">Create account</Button>
       </CardFooter>
-    </Card>
-  );
-};
-
-export default LoginForm;
+    </Card> */}
