@@ -50,7 +50,7 @@ console.log(media_type)
         movieid={JSON.stringify(id)}
         name={original_title}
         poster={poster_path}
-        media_type={media_type}
+        media_type='movie'
       />
     </section>
   );

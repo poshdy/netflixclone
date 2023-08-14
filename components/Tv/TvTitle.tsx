@@ -53,7 +53,7 @@ const TvTitle = ({
         movieid={JSON.stringify(id)}
         name={name}
         poster={poster_path}
-        media_type={Type}
+        media_type='tv'
       />
     </section>
   );

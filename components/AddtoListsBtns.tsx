@@ -18,7 +18,7 @@ const AddtoListsBtns = ({movieid,name,poster,media_type}:Iprops) => {
   const addToFav = async () => {
     const { error } = await supabase
       .from("favorites")
-      .insert({ movie_id:movieid, name, poster ,user_id:user?.id}).select();
+      .insert({ movie_id:movieid, name, poster ,user_id:user?.id,media_type}).select();
     toast.toast({
       title: `${name} add to favroites`
     })
