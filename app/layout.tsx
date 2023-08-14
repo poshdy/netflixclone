@@ -13,7 +13,7 @@ import SupabaseAuthProvider from "@/components/Providers/supabase-auth-provider"
 import "server-only";
 import { Toaster } from "@/components/ui/toaster";
 
-
+export const dynamic = 'force-dynamic'
 const poppins = Poppins({
   subsets: ["latin", "devanagari", "latin-ext"],
   weight: ["400", "500", "700", "900", "800"],
@@ -30,6 +30,8 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+
+
   const supabase = createClient();
   const {
     data: { session },
