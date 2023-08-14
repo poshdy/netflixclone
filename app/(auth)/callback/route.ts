@@ -2,6 +2,7 @@ import { NextResponse , NextRequest } from "next/server";
 import { createRouteHandlerClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
 
+export const dynamic = 'force-dynamic'
 export  async function GET(req:NextRequest){
     const requestUrl = new URL(req.url)
   
