@@ -45,7 +45,7 @@ const LoginForm = () => {
     if (user) {
       router.push("/");
     }
-  }, [router]);
+  }, [router , user]);
 
   return (
     <Card>

@@ -25,8 +25,7 @@ const SeasonEpisodes = ({ data }: { data: TVSHOW }) => {
 
   useEffect(() => {
     Fetcher();
-    console.log('api call made')
-  }, [SeasonNum]);
+  }, [SeasonNum , Fetcher]);
 
   const { data: Epi } = useSWR("api/season", () => Fetcher(), {
     fallbackData: `/api/season?id=${data.id}&season=1`,
