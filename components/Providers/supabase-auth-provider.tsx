@@ -94,11 +94,11 @@ const SignUPwithEmailandPassword = async (email: string, password: string)=>{
   };
 
   const signInWithGithub = async () => {
-    await supabase.auth.signInWithOAuth({ provider: "github" });
+    await supabase.auth.signInWithOAuth({ provider: "github" , options:{redirectTo:`${location.origin}/auth/callback`}});
   };
 
   const signInWithGoogle = async () => {
-    await supabase.auth.signInWithOAuth({ provider: "google" });
+    await supabase.auth.signInWithOAuth({ provider: "google" ,options:{redirectTo:`${location.origin}/auth/callback`} });
   };
 
   const signOut = async () => {
