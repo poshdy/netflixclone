@@ -9,10 +9,10 @@ import Link from "next/link";
 import { addToFav } from "@/actions/addToFavs";
 import { addToWatched } from "@/actions/addToWatched";
 interface Iprops {
-  movieid: string | undefined;
-  poster: string | undefined;
-  name: string | undefined;
-  media_type: string | undefined;
+  movieid: string | null;
+  poster: string | null;
+  name: string | null;
+  media_type: string | null;
   isModal?: boolean;
 }
 const AddtoListsBtns = ({
@@ -22,7 +22,7 @@ const AddtoListsBtns = ({
   media_type,
   isModal,
 }: Iprops) => {
-  const toast = useToast();
+  // const toast = useToast();
   const supabase = useSupabase();
   const { user } = useAuth();
 
@@ -30,7 +30,7 @@ const AddtoListsBtns = ({
     <div className="w-full flex flex-col  items-center gap-1 md:flex-row ">
       <Button
         onClick={() =>
-          addToWatched(supabase, poster, movieid, name, user?.id, media_type)
+          addToWatched(supabase,poster,movieid,name,user?.id,media_type)
         }
         size="sm"
         className=" w-full md:w-fit font-bold mx-1 border-2 rounded-3xl hover:rounded-md transition-all"

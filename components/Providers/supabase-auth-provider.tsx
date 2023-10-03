@@ -6,10 +6,10 @@ import { useRouter } from "next/navigation";
 import { useQuery } from "@tanstack/react-query";
 
 interface USER {
-  email: string | null | undefined;
-  created_at: string | null | undefined;
-  id: string | null | undefined;
-  user_name: string | null | undefined;
+  email: string | null;
+  created_at: string | null;
+  id: string | null;
+  user_name: string | null;
   avatar_url: string;
 }
 interface ContextI {
