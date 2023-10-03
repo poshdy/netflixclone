@@ -9,7 +9,7 @@ import Link from "next/link";
 import { addToFav } from "@/actions/addToFavs";
 import { addToWatched } from "@/actions/addToWatched";
 interface Iprops {
-  movieid: string | null 
+  movieid: string | null;
   poster: string | undefined | undefined;
   name: string | null | undefined;
   media_type: string | null | undefined;
@@ -32,7 +32,7 @@ const AddtoListsBtns = ({
         onClick={() =>
           addToWatched(supabase, poster, movieid, name, user?.id, media_type)
         }
-        size="sm"
+        size="icon"
         className=" w-full md:w-fit font-bold mx-1 border-2 rounded-3xl hover:rounded-md transition-all"
       >
         Watched

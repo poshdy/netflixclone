@@ -24,7 +24,7 @@ const Landing = ({ data }: LandingProp) => {
           src={imgUrl + movie?.poster_path || imgUrl + movie?.backdrop_path}
         />
       </div>
-      <div className="flex flex-col items-start gap-3">
+      <div className="flex flex-col items-start gap-2">
         <h1 className="text-2xl md:text-4xl font-extrabold lg:text-7xl uppercase">
           {movie?.original_title || movie?.title || movie?.name}
         </h1>
