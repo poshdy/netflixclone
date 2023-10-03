@@ -2,7 +2,7 @@ import { removeNullImgs } from "@/lib/removeNullImg"
 
 const ApiKey:string = process.env.NEXT_PUBLIC_API_KEY as string
 export const getSimilar = async (moiveid: string | number ,Type:string)=>{
-    const res = await fetch(`${process.env.BASE_URL}${Type}/${moiveid}/recommendations`,{
+    const res = await fetch(`${process.env.NEXT_API_KEY_BASE_URL}${Type}/${moiveid}/recommendations`,{
         method:"GET",
         headers:{
             accept: 'application/json',

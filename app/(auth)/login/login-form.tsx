@@ -70,31 +70,17 @@ const LoginForm = () => {
             </span>
           </div>
         </div>
-        <form onSubmit={handleSubmit}>
-          <div className="grid gap-2">
-            <Label htmlFor="email">Email</Label>
-            <Input
-              onChange={(e) => setEmail(e.target.value)}
-              id="email"
-              type="email"
-              placeholder="m@example.com"
-            />
-          </div>
-          <div className="grid gap-2">
-            <Label htmlFor="password">Password</Label>
-            <Input
-              onChange={(e) => setPassword(e.target.value)}
-              id="password"
-              type="password"
-            />
-          </div>
-        </form>
+        <div className="grid gap-2">
+          <Label htmlFor="email">Email</Label>
+          <Input id="email" type="email" placeholder="m@example.com" />
+        </div>
+        <div className="grid gap-2">
+          <Label htmlFor="password">Password</Label>
+          <Input id="password" type="password" />
+        </div>
       </CardContent>
       <CardFooter>
-        {error && "invalid credintials"}
-        <Button type="submit" className="w-full">
-          Create account
-        </Button>
+        <Button className="w-full">Create account</Button>
       </CardFooter>
     </Card>
   );

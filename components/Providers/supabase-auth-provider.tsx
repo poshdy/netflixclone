@@ -1,9 +1,9 @@
 "use client";
 import { useSupabase } from "./supabase-provider";
 import { Session } from "@supabase/supabase-js";
-import useSWR from "swr";
 import React, { createContext, useEffect, useContext } from "react";
 import { useRouter } from "next/navigation";
+import { useQuery } from "@tanstack/react-query";
 
 interface USER {
   email: string | null | undefined;
@@ -16,7 +16,7 @@ interface ContextI {
   user: USER | null;
   error: any;
   isLoading: boolean;
-  mutate: any;
+
   signOut: () => Promise<void>;
   SignUPwithEmailandPassword: (
     email: string,
@@ -31,7 +31,6 @@ const Context = createContext<ContextI>({
   user: null,
   error: null,
   isLoading: true,
-  mutate: null,
   signOut: async () => {},
   SignUPwithEmailandPassword: async (email: string, password: string) => null,
   signInWithGithub: async () => {},
@@ -67,8 +66,11 @@ export default function SupabaseAuthProvider({
     data: user,
     isLoading,
     error,
-    mutate,
-  } = useSWR(serverSession ? "user-context" : null, getUser);
+  } = useQuery({
+    queryKey: ["user-session", serverSession?.user?.id],
+    queryFn: getUser,
+    enabled: !!serverSession?.user.id,
+  });
 
   const SignUPwithEmailandPassword = async (
     email: string,
@@ -144,7 +146,6 @@ export default function SupabaseAuthProvider({
     user,
     isLoading,
     error,
-    mutate,
     signInWithEmail,
     SignUPwithEmailandPassword,
     signInWithGithub,

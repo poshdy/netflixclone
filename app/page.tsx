@@ -8,6 +8,7 @@ import { getFantasy } from "@/fetchers/getFantasy";
 import { getHorror } from "@/fetchers/getHorror";
 import { getNetflixOriginals } from "@/fetchers/getNetflixOriginals";
 import { getTrendingMovies } from "@/fetchers/getTrendingMovies";
+import { Suspense } from "react";
 export default async function Home() {
   const [
     NetflixOriginal,
@@ -29,11 +30,15 @@ export default async function Home() {
     getTrendingMovies("all"),
   ]);
   return (
-    <main className="">
+    <>
       <Landing data={NetflixOriginal} />
       <section className="flex flex-col gap-7 py-4 ">
-        <DisplayMoviesRow data={NetflixOriginal} title="Netflix Originals" />
-        <DisplayMoviesRow data={Trending} title="Trending Now" />
+        <Suspense fallback={<h1>Loadingg</h1>}>
+          <DisplayMoviesRow data={NetflixOriginal} title="Netflix Originals" />
+        </Suspense>
+        <Suspense fallback={<h1>Loadingg</h1>}>
+          <DisplayMoviesRow data={Trending} title="Trending Now" />
+        </Suspense>
         <DisplayMoviesRow data={Drama} title="Drama" />
         <DisplayMoviesRow data={Horror} title="Horror" />
         <DisplayMoviesRow data={Action} title="Action" />
@@ -41,6 +46,6 @@ export default async function Home() {
         <DisplayMoviesRow data={Comedy} title="Comedy" />
         <DisplayMoviesRow data={Fantasy} title="Fantasy" />
       </section>
-    </main>
+    </>
   );
 }

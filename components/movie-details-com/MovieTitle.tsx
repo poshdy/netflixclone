@@ -13,10 +13,8 @@ const MovieTitle = ({
   overview,
   poster_path,
   media_type,
-  title
+  title,
 }: MOVIEDATA) => {
-console.log(media_type)
-
   return (
     <section className="w-[80%] flex flex-col items-start space-y-2 ">
       <h1 className="text-2xl md:text-3xl font-extrabold lg:text-5xl  uppercase">
@@ -37,9 +35,9 @@ console.log(media_type)
           {vote_average.toFixed(1)} <Star className="ml-1" size={15} />
         </p>
         <p className="text-sm text-secondary flex items-center justify-center">
-          { release_date.slice(0,4) }
+          {release_date.slice(0, 4)}
           <Calendar className="ml-1" size={15} />
-        </p> 
+        </p>
         <p className="text-sm text-secondary flex items-center justify-center">
           {runtime} <Clock1 className="ml-1" size={15} />
         </p>
@@ -50,7 +48,7 @@ console.log(media_type)
         movieid={JSON.stringify(id)}
         name={original_title}
         poster={poster_path}
-        media_type='movie'
+        media_type="movie"
       />
     </section>
   );

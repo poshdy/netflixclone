@@ -1,6 +1,6 @@
 const ApiKey:string = process.env.NEXT_PUBLIC_API_KEY as string
 export const getHorror = async ()=>{
-    const res = await fetch(`${process.env.BASE_URL}discover/movie?with_genres=27`,{
+    const res = await fetch(`${process.env.NEXT_API_KEY_BASE_URL}discover/movie?with_genres=27`,{
         method:"GET",
         headers:{
             accept: 'application/json',

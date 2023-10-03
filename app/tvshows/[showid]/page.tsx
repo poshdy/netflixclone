@@ -1,5 +1,5 @@
 import DisplayMoviesRow from "@/components/DisplayMoviesRow";
-import SeasonEpisodes from "@/components/Tv/SeasonEpisodes";
+// import SeasonEpisodes from "@/components/Tv/SeasonEpisodes";
 import TvHeader from "@/components/Tv/TvHeader";
 import { getSimilar } from "@/fetchers/Details/SimilarMovies";
 
@@ -19,7 +19,7 @@ const TvDetailspage = async ({
       <TvHeader {...TvShow} />
 
       <div className="w-full bg-gradient-to-t from-black/50 to-transparent">
-        <SeasonEpisodes data={TvShow} />
+        {/* <SeasonEpisodes data={TvShow} /> */}
 
         <DisplayMoviesRow title="More like this" data={Similar} />
       </div>

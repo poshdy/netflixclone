@@ -4,14 +4,13 @@ import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import Logo from "@/public/Logo.png";
 import { NavLinks } from "@/constants";
-import SearchBar from "./SearchBar";
 import MobileNav from "./MobileNav";
 import { useAuth } from "./Providers/supabase-auth-provider";
 import Profile from "./Profile";
 import { Search } from "lucide-react";
 import { useProModal } from "@/hooks/use-modal";
 const NavBar = () => {
-  const { isOpen, onClose, onOpen } = useProModal();
+  // const { isOpen, onClose, onOpen } = useProModal();
   const { user } = useAuth();
   const [scrolled, setScrolled] = useState<boolean>(false);
 
@@ -30,9 +29,9 @@ const NavBar = () => {
     };
   }, [scrolled]);
 
-  const toggle = () => {
-    isOpen === true ? onClose() : onOpen();
-  };
+  // const toggle = () => {
+  //   isOpen === true ? onClose() : onOpen();
+  // };
 
   return (
     <header
@@ -49,7 +48,6 @@ const NavBar = () => {
               width={150}
               height={75}
               alt="logo"
-              priority
             />
           </Link>
           <div className="flex items-center gap-3">
@@ -65,14 +63,13 @@ const NavBar = () => {
           </div>
         </div>
         <div className="flex items-center gap-4">
-          <Search onClick={() => toggle()} size={20} />
+          <Link href={"search"}>
+            <Search />
+          </Link>
           {user && <Profile />}
         </div>
       </nav>
-      <MobileNav toggle={toggle} />
-    <section className={` duration-300 ease-in-out bg-opacity-80 bg-black w-full h-screen absolute ${isOpen ? ' right-0 top-20' :'right-[-500%]'}`}>
-    <SearchBar />
-    </section>
+      <MobileNav />
     </header>
   );
 };
@@ -82,6 +79,6 @@ export default NavBar;
 /* <MobileNav/> */
 // {isOpen && (
 //   <div className="bg-opacity-20  backdrop-blur-lg rounded-t-2xl drop-shadow-lg w-full h-screen duration-300 ease-in-out absolute right-0 top-20">
-//    
+//
 //   </div>
 // )}

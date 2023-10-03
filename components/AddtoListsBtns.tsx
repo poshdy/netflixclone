@@ -1,34 +1,37 @@
 "use client";
 import React from "react";
-import { CheckCircle2, PlusCircle } from "lucide-react";
+import { CheckCircle2, InfoIcon, PlusCircle } from "lucide-react";
 import { Button } from "./ui/button";
 import { useSupabase } from "./Providers/supabase-provider";
 import { useToast } from "./ui/use-toast";
 import { useAuth } from "./Providers/supabase-auth-provider";
+import Link from "next/link";
+import { addToFav } from "@/actions/addToFavs";
+import { addToWatched } from "@/actions/addToWatched";
 interface Iprops {
-  movieid:string | undefined
-  poster:string | undefined
-  name:string | undefined
-  media_type:string
+  movieid: string | undefined;
+  poster: string | undefined;
+  name: string | undefined;
+  media_type: string | undefined;
+  isModal?: boolean;
 }
-const AddtoListsBtns = ({movieid,name,poster,media_type}:Iprops) => {
-  const toast = useToast()
+const AddtoListsBtns = ({
+  movieid,
+  name,
+  poster,
+  media_type,
+  isModal,
+}: Iprops) => {
+  const toast = useToast();
   const supabase = useSupabase();
-  const {user} = useAuth()
-  const addToFav = async () => {
-    const { error } = await supabase
-      .from("favorites")
-      .insert({ movie_id:movieid, name, poster ,user_id:user?.id,media_type}).select();
-    toast.toast({
-      title: `${name} add to favroites`
-    })
-    if(error){
-      console.log(error.details)
-    }
-  };
+  const { user } = useAuth();
+
   return (
     <div className="w-full flex flex-col  items-center gap-1 md:flex-row ">
       <Button
+        onClick={() =>
+          addToWatched(supabase, poster, movieid, name, user?.id, media_type)
+        }
         size="sm"
         className=" w-full md:w-fit font-bold mx-1 border-2 rounded-3xl hover:rounded-md transition-all"
       >
@@ -36,7 +39,9 @@ const AddtoListsBtns = ({movieid,name,poster,media_type}:Iprops) => {
         <CheckCircle2 className="ml-1" size={20} />
       </Button>
       <Button
-      onClick={addToFav}
+        onClick={() =>
+          addToFav(supabase, poster, movieid, name, user?.id, media_type)
+        }
         size="sm"
         variant={"outline"}
         className=" font-bold mx-1 rounded-full w-full md:w-fit "
@@ -44,6 +49,17 @@ const AddtoListsBtns = ({movieid,name,poster,media_type}:Iprops) => {
         My List
         <PlusCircle className="ml-1" size={20} />
       </Button>
+      {isModal && (
+        <Link
+          href={
+            media_type === "tv" ? `tvshows/${movieid}` : `movies/${movieid}`
+          }
+          className=" font-bold mx-1 rounded-full w-full flex items-center md:w-fit "
+        >
+          More info
+          <InfoIcon className="ml-1" size={20} />
+        </Link>
+      )}
     </div>
   );
 };

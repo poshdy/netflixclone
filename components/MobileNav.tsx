@@ -7,19 +7,19 @@ import Logo from "@/public/Logo.png";
 import { Search } from "lucide-react";
 import { useAuth } from "./Providers/supabase-auth-provider";
 import Profile from "./Profile";
-interface Iprop {
-  toggle: () => void;
-}
-const MobileNav = ({ toggle }: Iprop) => {
+interface Iprop {}
+const MobileNav = ({}: Iprop) => {
   const { user } = useAuth();
   return (
     <nav className="container py-2 sticky top-0 z-10  block md:hidden">
       <div className="flex items-center justify-between">
         <Link href={"/"}>
-          <Image src={Logo} width={100} height={31} priority alt="logo" />
+          <Image src={Logo} width={100} height={31} alt="logo" />
         </Link>
         <div className="flex items-center gap-2">
-          <Search onClick={() => toggle()} />
+          <Link href={"search"}>
+            <Search />
+          </Link>
 
           {user && <Profile />}
         </div>

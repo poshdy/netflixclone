@@ -1,6 +1,6 @@
 const ApiKey:string = process.env.NEXT_PUBLIC_API_KEY as string
 export const getEpisodes = async (moiveid: string | number ,seasonNo:string | number | null)=>{
-    const res = await fetch(`${process.env.BASE_URL}tv/${moiveid}/season/${seasonNo}`,{
+    const res = await fetch(`${process.env.NEXT_API_KEY_BASE_URL}tv/${moiveid}/season/${seasonNo}`,{
         method:"GET",
         headers:{
             accept: 'application/json',

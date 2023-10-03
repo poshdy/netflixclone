@@ -10,7 +10,7 @@ const TvTitle = ({
   number_of_episodes,
   number_of_seasons,
   created_by,
-  last_air_date,
+
   genres,
   id,
   original_name,
@@ -18,7 +18,6 @@ const TvTitle = ({
   poster_path,
 }: TVSHOW) => {
   const Type = first_air_date ? "tv" : "movie";
-  
 
   return (
     <section className="w-[80%] flex flex-col items-start space-y-2 ">
@@ -48,12 +47,14 @@ const TvTitle = ({
       </div>
       <p className="text-xs md:text-sm">{overview}</p>
       <Cast type="tv" id={id} />
-     <p className=" text-sm text-secondary"><span className="font-bold"> Created by:</span> {created_by[0].name}</p>
+      <p className=" text-sm text-secondary">
+        <span className="font-bold"> Created by:</span> {created_by[0].name}
+      </p>
       <AddtoListsBtns
         movieid={JSON.stringify(id)}
         name={name}
         poster={poster_path}
-        media_type='tv'
+        media_type="tv"
       />
     </section>
   );

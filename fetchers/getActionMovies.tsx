@@ -2,7 +2,7 @@ import { removeNullImgs } from "@/lib/removeNullImg"
 
 const ApiKey:string = process.env.NEXT_PUBLIC_API_KEY as string
 export const getAction = async ()=>{
-    const res = await fetch(`${process.env.BASE_URL}discover/movie?with_genres=28`,{
+    const res = await fetch(`${process.env.NEXT_API_KEY_BASE_URL}discover/movie?with_genres=28`,{
         method:"GET",
         headers:{
             accept: 'application/json',

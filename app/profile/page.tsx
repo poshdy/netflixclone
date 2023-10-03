@@ -9,25 +9,29 @@ const Profilepage = async () => {
   const { data: Favs } = await supabase.from("favorites").select();
 
   return (
-    <div className="space-y-10">
-      <h1 className="font-bold text-lg md:text-2xl md:text-center text-left">
+    <section className="space-y-5 my-10">
+      <h1 className="font-bold text-lg md:text-2xl text-center md:text-left">
         My List
       </h1>
       <div className="w-full flex flex-col items-center justify-center gap-2  md:flex-row md:flex-wrap ">
-        {Favs?.map((f) => (
-          <div key={f.movie_id} className="relative w-[200px] h-[300px] md:w-[250px] md:h-[350px]">
+        {Favs?.map((favs) => (
+          <div
+            key={favs.movie_id}
+            className="relative w-[200px] h-[300px] md:w-[250px] md:h-[350px]"
+          >
             <Image
               className="rounded-md object-cover shadow-md"
               priority
               fill
               sizes="(max-width: 300px) 100vw, (max-width: 400px) 50vw, 33vw"
-              src={imgUrl + f.poster}
+              src={imgUrl + favs.poster}
               alt="movie"
             />
+            div{" "}
           </div>
         ))}
       </div>
-    </div>
+    </section>
   );
 };
 
