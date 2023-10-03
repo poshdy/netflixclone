@@ -9,7 +9,7 @@ import { useMovieModal } from "@/hooks/use-movie-modal";
 import SelectGenre from "@/components/SelectGenre";
 import { Button } from "@/components/ui/button";
 
-const Moviespage = async () => {
+const Moviespage = () => {
   const [page, setPage] = useState(1);
   const { onOpen } = useMovieModal();
   const [genreId, setGenre] = useState<string>("28");
