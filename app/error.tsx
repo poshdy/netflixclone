@@ -6,7 +6,7 @@ export default function Error({
   error,
   reset,
 }: {
-  error: Error
+  error: Error;
   reset: () => void;
 }) {
   useEffect(() => {
