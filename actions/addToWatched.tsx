@@ -2,11 +2,11 @@ import { SupabaseClient } from "@supabase/supabase-js";
 // const toast = useToast();
 export const addToWatched = async (
   Client: SupabaseClient,
-  poster: string | null,
-  movieId: string | null,
-  name: string | null,
+  poster: string | undefined |null,
+  movieId: string | null | null,
+  name: string | null | undefined,
   userId: string | null |undefined,
-  type: string | null
+  type: string | null | undefined
 ) => {
   const { error } = await Client.from("watched")
     .insert({

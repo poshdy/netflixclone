@@ -3,11 +3,12 @@ import { SupabaseClient } from "@supabase/supabase-js";
 // const toast = useToast();
 export const addToFav = async (
   Client: SupabaseClient,
-  poster: string | null,
-  movie_id: string | null,
-  name: string | null,
-  userId: string| undefined | null,
-  type: string | null
+
+  poster: string | undefined | null,
+  movie_id: string | null | null,
+  name: string | null | undefined,
+  userId: string | null | undefined,
+  type: string | null | undefined
 ) => {
   const { error } = await Client.from("favorites")
     .insert({
