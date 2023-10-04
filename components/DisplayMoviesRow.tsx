@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import Image from "next/image";
-import { A11y, Navigation, Pagination, Scrollbar } from "swiper/modules";
+import { FreeMode, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { imgUrl } from "@/constants";
 import { useMovieModal } from "@/hooks/use-movie-modal";
@@ -16,19 +16,31 @@ const DisplayMoviesRow = ({ title, data }: DisplayProp) => {
   return (
     <section>
       <h3 className="font-bold text-lg md:text-2xl mb-2">{title}</h3>
+
       <Swiper
-        modules={[Navigation, Pagination, Scrollbar, A11y]}
-        loop={true}
+        freeMode={true}
+        pagination={{
+          clickable: true,
+        }}
+        modules={[FreeMode, Pagination]}
         breakpoints={{
-          320: {
+          350: {
+            slidesPerView: 2,
+            spaceBetween: 15,
+          },
+          600: {
             slidesPerView: 3,
-            spaceBetween: 20,
+            spaceBetween: 15,
           },
-          480: {
+          700: {
             slidesPerView: 4,
-            spaceBetween: 30,
+            spaceBetween: 15,
           },
-          640: {
+          800: {
+            slidesPerView: 5,
+            spaceBetween: 15,
+          },
+          1000: {
             slidesPerView: 6,
             spaceBetween: 15,
           },
@@ -37,7 +49,7 @@ const DisplayMoviesRow = ({ title, data }: DisplayProp) => {
         {data?.map((movie) => (
           <SwiperSlide key={movie.id}>
             <div
-              className=" relative w-[160px] h-[260px] "
+              className="relative w-[160px] h-[260px] "
               onClick={() => onOpen(movie)}
             >
               <Image
@@ -45,7 +57,7 @@ const DisplayMoviesRow = ({ title, data }: DisplayProp) => {
                 alt={movie?.name || movie?.title}
                 fill
                 loading="lazy"
-                sizes="(max-width: 70vw) , (max-height: 90vh) ,80vw ,100vh"
+                sizes="100vw ,100vh"
                 src={imgUrl + movie.poster_path || imgUrl + movie.backdrop_path}
               />
             </div>

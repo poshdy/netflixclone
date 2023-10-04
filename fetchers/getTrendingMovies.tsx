@@ -1,3 +1,5 @@
+import { removeNullImgs } from "@/lib/removeNullImg";
+
 const ApiKey: string = process.env.NEXT_PUBLIC_API_KEY as string;
 
 export const getTrendingMovies = async (Type: string) => {
@@ -15,6 +17,6 @@ export const getTrendingMovies = async (Type: string) => {
   }
 
   const allData = await res.json();
-  const data = allData.results;
+  const data = removeNullImgs(allData.results);
   return data;
 };

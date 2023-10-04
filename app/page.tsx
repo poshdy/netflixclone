@@ -30,8 +30,8 @@ export default async function Home() {
     getTrendingMovies("all"),
   ]);
   return (
-    <>
-      <Landing data={NetflixOriginal} />
+    <section className="space-y-10">
+      <Landing data={NetflixOriginal?.at(0)} />
       <section className="flex flex-col gap-7 py-4 ">
         <Suspense fallback={<h1>Loadingg</h1>}>
           <DisplayMoviesRow data={NetflixOriginal} title="Netflix Originals" />
@@ -46,6 +46,6 @@ export default async function Home() {
         <DisplayMoviesRow data={Comedy} title="Comedy" />
         <DisplayMoviesRow data={Fantasy} title="Fantasy" />
       </section>
-    </>
+    </section>
   );
 }

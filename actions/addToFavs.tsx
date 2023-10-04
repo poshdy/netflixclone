@@ -19,9 +19,7 @@ export const addToFav = async (
       type,
     })
     .select();
-  //   toast.toast({
-  //     title: `${name} add to favroites`,
-  //   });
+
   if (error) {
     console.log(error.details);
   }

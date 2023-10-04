@@ -16,7 +16,7 @@ const MovieHeader = async (data: MOVIEDATA) => {
           sizes="100vw , 100vh"
         />
       </div>
-      <div className="h-screen w-[90%] absolute top-0 left-0 bg -z-40 -gradient-to-r from-black to-transparent flex flex-col items-center justify-center" />
+
       <MovieTitle {...data} />
     </section>
   );

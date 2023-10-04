@@ -26,7 +26,7 @@ const Moviespage = () => {
 
   return (
     <section className="space-y-16">
-      <Landing data={data?.slice(0, 3)} />
+      <Landing data={data[0]} />
 
       <section className=" flex flex-col gap-2 items-center container my-2">
         <SelectGenre setGenre={setGenre} />

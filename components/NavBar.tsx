@@ -8,11 +8,12 @@ import MobileNav from "./MobileNav";
 import { useAuth } from "./Providers/supabase-auth-provider";
 import Profile from "./Profile";
 import { Search } from "lucide-react";
-import { useProModal } from "@/hooks/use-modal";
+import { usePathname } from "next/navigation";
+
 const NavBar = () => {
-  // const { isOpen, onClose, onOpen } = useProModal();
   const { user } = useAuth();
   const [scrolled, setScrolled] = useState<boolean>(false);
+  const path = usePathname();
 
   // change nav color while scrolling
   useEffect(() => {
@@ -29,14 +30,10 @@ const NavBar = () => {
     };
   }, [scrolled]);
 
-  // const toggle = () => {
-  //   isOpen === true ? onClose() : onOpen();
-  // };
-
   return (
     <header
-      className={` sticky top-0 z-20 duration-300 ease-in-out ${
-        scrolled ? "bg-black/70 " : "bg-transparent"
+      className={`sticky top-0 z-20 duration-300 ease-in-out p-2  ${
+        scrolled ? "bg-background" : "bg-background/60"
       }`}
     >
       <nav className="container pt-2 hidden md:flex md:items-center md:justify-between">
@@ -44,41 +41,36 @@ const NavBar = () => {
           <Link href={"/"}>
             <Image
               src={Logo}
+              loading="lazy"
               placeholder="blur"
               width={150}
               height={75}
               alt="logo"
             />
           </Link>
-          <div className="flex items-center gap-3">
-            {NavLinks.map((link) => (
-              <Link
-                key={link.id}
-                className="font-semibold text-sm  duration-300 ease-in-out hover:text-primary"
-                href={`${link.id}`}
-              >
-                {link.name}
-              </Link>
-            ))}
-          </div>
         </div>
         <div className="flex items-center gap-4">
+          {NavLinks.map((link) => (
+            <Link
+              key={link.id}
+              className={` ${
+                link.path === path && "text-red-700 font-semibold"
+              } font-medium text-sm duration-300 ease-in-out hover:text-red-700`}
+              href={`${link.path}`}
+            >
+              {link.name}
+            </Link>
+          ))}
+
           <Link href={"search"}>
             <Search />
           </Link>
           {user && <Profile />}
         </div>
       </nav>
-      <MobileNav />
+      <MobileNav path={path} />
     </header>
   );
 };
 
 export default NavBar;
-
-/* <MobileNav/> */
-// {isOpen && (
-//   <div className="bg-opacity-20  backdrop-blur-lg rounded-t-2xl drop-shadow-lg w-full h-screen duration-300 ease-in-out absolute right-0 top-20">
-//
-//   </div>
-// )}

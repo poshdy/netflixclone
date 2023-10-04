@@ -25,7 +25,7 @@ const Tvpage = () => {
 
   return (
     <section className="space-y-28">
-      <Landing data={data?.slice(0, 3)} />
+      <Landing data={data[0]} />
 
       <section className=" flex flex-col gap-2 items-center container">
         <TvGenres setGenre={setGenre} />
@@ -40,7 +40,7 @@ const Tvpage = () => {
                 className="rounded-md object-cover"
                 fill
                 sizes="100vw , 100vh"
-                alt={movie?.title}
+                alt="poster"
                 src={imgUrl + movie?.poster_path}
               />
             </div>
@@ -49,7 +49,7 @@ const Tvpage = () => {
       </section>
       <section className="flex flex-col items-center gap-2 w-full ">
         <Button
-        className="w-full"
+          className="w-full"
           variant={"ghost"}
           disabled={page === 1}
           onClick={() => setPage((prev) => prev - 1)}

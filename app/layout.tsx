@@ -1,12 +1,11 @@
 import { cn } from "@/lib/utils";
 import "./globals.css";
 import type { Metadata } from "next";
-import { Poppins} from "next/font/google";
+import { Poppins } from "next/font/google";
 import NavBar from "@/components/NavBar";
 import "swiper/css";
-import "swiper/css/navigation";
 import "swiper/css/pagination";
-import "swiper/css/scrollbar";
+import 'swiper/css/free-mode';
 import { createClient } from "@/lib/supabase-server";
 import SupabaseProvider from "@/components/Providers/supabase-provider";
 import SupabaseAuthProvider from "@/components/Providers/supabase-auth-provider";
@@ -19,6 +18,7 @@ const poppins = Poppins({
   subsets: ["latin", "devanagari", "latin-ext"],
   weight: ["400", "500", "700", "900", "800"],
   style: ["normal"],
+  preload: true,
 });
 
 export const metadata: Metadata = {

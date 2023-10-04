@@ -22,32 +22,40 @@ const AddtoListsBtns = ({
   media_type,
   isModal,
 }: Iprops) => {
-  // const toast = useToast();
+  const toast = useToast();
   const supabase = useSupabase();
   const { user } = useAuth();
 
+  const onAddToList = () => {
+    addToFav(supabase, poster, movieid, name, user?.id, media_type);
+    toast.toast({
+      title: `${name} add to favroites`,
+    });
+  };
+  const onAddToWatched = () => {
+    addToWatched(supabase, poster, movieid, name, user?.id, media_type);
+    toast.toast({
+      title: `${name} add to Watched list`,
+    });
+  };
+
   return (
-    <div className="w-full flex flex-col  items-center gap-1 md:flex-row ">
+    <div className="flex items-center justify-start gap-2">
       <Button
-        onClick={() =>
-          addToWatched(supabase, poster, movieid, name, user?.id, media_type)
-        }
-        size="icon"
-        className=" w-full md:w-fit font-bold mx-1 border-2 rounded-3xl hover:rounded-md transition-all"
+        onClick={onAddToWatched}
+        variant={"default"}
+        className="md:px-2 md:py-1 rounded-sm font-bold shadow-md bg-background text-white hover:bg-background/70"
       >
         Watched
         <CheckCircle2 className="ml-1" size={20} />
       </Button>
       <Button
-        onClick={() =>
-          addToFav(supabase, poster, movieid, name, user?.id, media_type)
-        }
-        size="sm"
-        variant={"outline"}
-        className=" font-bold mx-1 rounded-full w-full md:w-fit "
+        onClick={onAddToList}
+        variant={"destructive"}
+        className="md:px-2 md:py-1  rounded-sm font-bold shadow-md"
       >
-        My List
         <PlusCircle className="ml-1" size={20} />
+        Add to List
       </Button>
       {isModal && (
         <Link
